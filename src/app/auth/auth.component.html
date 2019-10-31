@@ -8,7 +8,7 @@
 				<input #login type="text">
 				<input #password type="password">
 				<button (click)="signInOrUp(login, password)">{{signInUp ? 'Sign In' : 'Sign Up'}}</button>
-				<h2></h2>
+				<h2>{{ message }}</h2>
 				<!-- <button (click)="test(login, password)">{{signInUp ? 'Sign In' : 'Sign Up'}}</button> -->
 			</div>
 			<div class="sign-in-up">

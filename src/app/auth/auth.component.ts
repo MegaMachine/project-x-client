@@ -10,6 +10,7 @@ export class AuthComponent implements OnInit {
 
 	title = 'client';
 	signInUp = false;
+	message: string;
 
 	constructor(
 		private readonly appService: AppService,
@@ -29,10 +30,12 @@ export class AuthComponent implements OnInit {
 						if (result && result.status && result.data.token) {
 							window.localStorage.setItem('token', 'Bearer ' + result.data.token);
 						}
+						this.message = res[`message`];
 					},
 					(err) => {
 						result = err;
 						console.log('sign-in res:', result);
+						this.message = err[`message`];
 					}
 				);
 		} else {
@@ -41,10 +44,12 @@ export class AuthComponent implements OnInit {
 					(res) => {
 						result = res;
 						console.log('sign-up res:', result);
+						this.message = res[`message`];
 					},
 					(err) => {
 						result = err;
 						console.log('sign-up res:', result);
+						this.message = err[`message`];
 					}
 				);
 		}
