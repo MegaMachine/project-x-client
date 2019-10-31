@@ -9,6 +9,7 @@ import { AppService } from '../app.service';
 export class AuthComponent implements OnInit {
 
 	title = 'client';
+	signInUp = false;
 
 	constructor(
 		private readonly appService: AppService,
@@ -17,12 +18,40 @@ export class AuthComponent implements OnInit {
 	ngOnInit() {
 	}
 
-	auth(login: string, password: string) {
-		const res = this.appService.auth(login, password);
-
-		if (typeof res === 'string') {
-			window.localStorage.setItem('token', JSON.stringify('Bearer' + res));
+	signInOrUp(login, password) {
+		let result;
+		if (this.signInUp) {
+			this.appService.signInUser(login.value, password.value)
+				.subscribe(
+					(res) => {
+						result = res;
+						console.log('sign-in res:', result);
+						if (result && result.status && result.data.token) {
+							window.localStorage.setItem('token', 'Bearer ' + result.data.token);
+						}
+					},
+					(err) => {
+						result = err;
+						console.log('sign-in res:', result);
+					}
+				);
+		} else {
+			this.appService.signUpUser(login.value, password.value)
+				.subscribe(
+					(res) => {
+						result = res;
+						console.log('sign-up res:', result);
+					},
+					(err) => {
+						result = err;
+						console.log('sign-up res:', result);
+					}
+				);
 		}
+	}
+
+	checkSignInUp(sign) {
+		this.signInUp = sign.checked;
 	}
 
 }

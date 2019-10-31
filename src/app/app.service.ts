@@ -10,21 +10,25 @@ export class AppService {
 		private readonly httpClient: HttpClient,
 	) { }
 
-	auth(login, password) {
-		console.log('AppService: ', login.value, password.value)
-		this.httpClient.post('http://localhost:3000/auth/sign-up', {
-			login: login.value,
-			password: password.value,
-		}).subscribe(
-			(response: string) => {
-				// const res = JSON.parse(response);
-				console.log(response);
-			},
-			(error) => {
-				console.log(error.error.text)
+	signUpUser(login, password) {
+		console.log({
+			login,
+			password,
+		})
+		return this.httpClient.post('http://localhost:3000/auth/sign-up', {
+			login,
+			password,
+		});
+	}
 
-				throw new Error(error.error.text);
-			}
-		)
+	signInUser(login, password) {
+		console.log({
+			login,
+			password,
+		})
+		return this.httpClient.post('http://localhost:3000/auth/sign-in', {
+			login,
+			password,
+		});
 	}
 }
