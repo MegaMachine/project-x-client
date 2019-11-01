@@ -11,7 +11,7 @@ export class AuthComponent implements OnInit {
 	title = 'client';
 	signInUp = false;
 	message: string;
-
+	
 	constructor(
 		private readonly appService: AppService,
 	) { }
@@ -57,6 +57,23 @@ export class AuthComponent implements OnInit {
 
 	checkSignInUp(sign) {
 		this.signInUp = sign.checked;
+	}
+
+	test() {
+		this.appService.test()
+			.subscribe(
+				(res) => {
+					this.message = res[`message`];
+				},
+				(err) => {
+					this.message = err[`error`];
+
+					if (err[`status`] === 401) {
+						this.message = 'Please login user.';
+					}
+					console.log(err)
+				}
+			);
 	}
 
 }
