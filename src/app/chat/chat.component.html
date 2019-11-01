@@ -1,1 +1,13 @@
-<p>chat works!</p>
+<div *ngIf="auth" class="container">
+    <div class="row">
+        {{ chatContent }}
+    </div>
+    <div class="row flex-column">
+        <h2>Your name: {{ name }}</h2>
+        <textarea name="chat-field" id="chat-field" cols="30" rows="10"></textarea>
+        <button>Send</button>
+    </div>
+</div>
+<div *ngIf="!auth">
+    <h2>NO CHAT !!</h2>
+</div>

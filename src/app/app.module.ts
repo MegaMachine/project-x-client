@@ -19,6 +19,7 @@ const appRoutes = [
   declarations: [
     AppComponent,
     AuthComponent,
+    ChatComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

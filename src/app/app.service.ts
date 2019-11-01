@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AppService {
-	private authToken = window.localStorage.getItem('token');
+	authToken = new BehaviorSubject(window.localStorage.getItem('token'));
 
 	constructor(
 		private readonly httpClient: HttpClient,
@@ -35,8 +36,9 @@ export class AppService {
 
 	test() {
 		let header;
-		this.authToken = window.localStorage.getItem('token');
-		if (this.authToken) {
+		this.authToken.next(window.localStorage.getItem('token'));
+		console.log(this.authToken.getValue());
+		if (this.authToken.getValue()) {
 			header = {
 				headers: new HttpHeaders().set('Authorization', window.localStorage.getItem('token'))
 			};
