@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
 	selector: 'app-auth',
@@ -14,6 +16,7 @@ export class AuthComponent implements OnInit {
 	
 	constructor(
 		private readonly appService: AppService,
+		private router: Router,
 	) { }
 
 	ngOnInit() {
@@ -28,7 +31,8 @@ export class AuthComponent implements OnInit {
 						result = res;
 						console.log('sign-in res:', result);
 						if (result && result.status && result.data.token) {
-							window.localStorage.setItem('token', 'Bearer ' + result.data.token);
+							window.localStorage.setItem('token', result.data.token);
+							this.router.navigate(['chat']);
 						}
 						this.message = res[`message`];
 					},

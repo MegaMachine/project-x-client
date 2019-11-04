@@ -1,0 +1,13 @@
+<header>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-1">logo</div>
+            <div class="col-1">
+                <button type="button" class="btn btn-dark"
+                    *ngIf="auth"
+                    (click)="logout()">Logout</button>
+                <!-- <button type="button" class="btn btn-dark"></button> -->
+            </div>
+        </div>
+    </div>
+</header>

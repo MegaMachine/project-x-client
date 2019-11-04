@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from './auth/auth.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AppService {
-	authToken = new BehaviorSubject(window.localStorage.getItem('token'));
 
 	constructor(
 		private readonly httpClient: HttpClient,
+		private readonly authService: AuthService,
 	) { }
 
 	signUpUser(login, password) {
@@ -36,9 +37,9 @@ export class AppService {
 
 	test() {
 		let header;
-		this.authToken.next(window.localStorage.getItem('token'));
-		console.log(this.authToken.getValue());
-		if (this.authToken.getValue()) {
+		this.authService.authToken.next(window.localStorage.getItem('token'));
+		console.log(this.authService.authToken.getValue());
+		if (this.authService.authToken.getValue()) {
 			header = {
 				headers: new HttpHeaders().set('Authorization', window.localStorage.getItem('token'))
 			};

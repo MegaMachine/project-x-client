@@ -1,22 +1,26 @@
-<div class="container">
-	<div class="row justify-content-center">
-		<div class="col-12">
-			<h1>{{signInUp ? 'Sign In' : 'Sign Up'}}</h1>
-		</div>
-		<div class="col-6">
-			<div class="auth-block">
-				<input #login type="text">
-				<input #password type="password">
-				<button (click)="signInOrUp(login, password)">{{signInUp ? 'Sign In' : 'Sign Up'}}</button>
-				<h2>{{ message }}</h2>
-				<!-- <button (click)="test(login, password)">{{signInUp ? 'Sign In' : 'Sign Up'}}</button> -->
+<section>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<h1>{{ signInUp ? "Sign In" : "Sign Up" }}</h1>
 			</div>
-			<div class="sign-in-up">
-				<input type="checkbox" #sign (click)="checkSignInUp(sign)" name="sign-in-up" id="sign-in-up">
-				<label for="sign-in-up">{{signInUp ? 'Sign In' : 'Sign Up'}}</label>
-			</div>
+			<div class="col-3">
+				<div class="auth-block form-group">
+					<input class="form-control"  #login type="text" />
+					<input class="form-control"  #password type="password" />
+					<button type="button" class="btn btn-secondary" (click)="signInOrUp(login, password)">
+						{{ signInUp ? "Sign In" : "Sign Up" }}
+					</button>
+					<h2>{{ message }}</h2>
+					<!-- <button (click)="test(login, password)">{{signInUp ? 'Sign In' : 'Sign Up'}}</button> -->
+				</div>
+				<div class="sign-in-up">
+					<input type="checkbox" #sign (click)="checkSignInUp(sign)" name="sign-in-up" id="sign-in-up" />
+					<label for="sign-in-up">{{ signInUp ? "Sign In" : "Sign Up" }}</label>
+				</div>
 
-			<button (click)="test()">TEST</button>
+				<button (click)="test()">TEST</button>
+			</div>
 		</div>
 	</div>
-</div>
+</section>
